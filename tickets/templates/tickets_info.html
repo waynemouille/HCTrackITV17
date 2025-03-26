@@ -1,0 +1,69 @@
+{% extends "main.html" %}
+
+
+{% block content %}
+
+<br>
+<br>
+    <div class="container d-flex justify-content-center">
+        <div class="card text-center w-75">
+            <div class="card-header">
+                <h3><strong>{{ ticket.name }}</strong></h3>
+            </div>
+
+            <div class="card-body">
+                <p class="card-title border-bottom pb-3"><strong>Assigned To - </strong>{{ ticket.assignedto }}</p>
+                <p class="card-text pt-2 border-bottom pb-3"><strong>Status -</strong>                  
+                    {% if ticket.status == "NEW" %}
+                        <span class="badge text-bg-primary">{{ ticket.status }}</span>
+                    {% endif %}
+                    {% if ticket.status == "ASSIGNED / PENDING" %}
+                        <span class="badge text-bg-info">{{ ticket.status }}</span>
+                    {% endif %}
+                    {% if ticket.status == "SCHEDULED" %}
+                        <span class="badge text-bg-dark">{{ ticket.status }}</span>
+                    {% endif %}
+                    {% if ticket.status == "IN PROGRESS" %}
+                        <span class="badge text-bg-warning">{{ ticket.status }}</span>
+                    {% endif %}
+                    {% if ticket.status == "ON HOLD - User Unavailable" %}
+                        <span class="badge text-bg-danger">{{ ticket.status }}</span>
+                    {% endif %}
+                    {% if ticket.status == "ON HOLD - Waiting on Parts" %}
+                        <span class="badge text-bg-danger">{{ ticket.status }}</span>
+                    {% endif %}
+                    {% if ticket.status == "ON HOLD - Research" %}
+                        <span class="badge text-bg-danger">{{ ticket.status }}</span>
+                    {% endif %}
+                    {% if ticket.status == "ON HOLD - Misc" %}
+                        <span class="badge text-bg-danger">{{ ticket.status }}</span>
+                    {% endif %}</p>
+                <p class="card-text"><strong>Department - </strong>{{ ticket.department }}</p>
+                <p class="card-text"><strong>Phone - </strong>{{ ticket.phone }}</p>
+                <p class="card-text"><strong>Email - </strong>{{ ticket.email }}</p>
+                <p class="card-text"><strong>Category - </strong>{{ ticket.category }}</p>
+                <p class="card-text"><strong>Issue Description:</strong>
+                <p class="card-text descrip">{{ ticket.description }}</p>
+                <p class="card-text"><strong>Ongoing Notes:</strong>
+                <p class="card-text descrip">{{ ticket.ongoing_notes }}</p><br/>
+            </div>
+            <div class="card-footer text-body-secondary">
+                Created :  <strong>{{ ticket.created_at }}</strong><br/>
+                Last Updated :  <strong>{{ ticket.last_updated }}</strong>
+                <br/><br/>
+                {% if request.user.is_staff %}
+                    <a href="{% url 'tickets_update_update' ticket.id %}" class="btn btn-primary">Update Request</a>&nbsp;&nbsp;
+                    <a href="{% url 'tickets_delete' ticket.id %}" class="btn btn-danger">Delete</a>&nbsp;&nbsp;
+                    <a href="{% url 'tickets_update_complete' ticket.id %}" class="btn btn-success">Mark as Completed</a>&nbsp;&nbsp;
+                    <a href="{% url 'tickets_home' %}" class="btn btn-secondary">Back</a>&nbsp;&nbsp;
+                {% else %}
+                    <a href="{% url 'tickets_home' %}" class="btn btn-secondary">Back</a>
+                {% endif %}
+                    <br/>
+                <br/>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}

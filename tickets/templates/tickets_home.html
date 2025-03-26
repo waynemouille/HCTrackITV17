@@ -1,0 +1,87 @@
+{% extends "main.html" %}
+{% load static %}
+
+
+{% block content %}
+
+
+<div class="container">
+    <table id="example" class="table table-striped" style="width:100%">
+    <br>
+    <br>
+        <h2>All Active Service Requests</h2>
+        <br>
+        <a href="{% url 'tickets_createnew' %}" class="btn btn-outline-primary">Create New Service Request</a>&nbsp;&nbsp;
+        <a href="{% url 'tickets_home' %}" class="btn btn btn-secondary">All Active Requests</a>&nbsp;&nbsp;
+        <a href="{% url 'tickets_current' %}" class="btn btn btn-info" style="color: white">New / In Progress</a>&nbsp;&nbsp;
+        <a href="{% url 'tickets_onhold' %}" class="btn btn btn-danger">On Hold</a>&nbsp;&nbsp;
+        <a href="{% url 'tickets_completed' %}" class="btn btn btn-success">Completed</a>&nbsp;&nbsp;
+        <br>
+        <br>
+
+        <thead>
+            <tr>
+                <th class="not_mapped_style" style="width: 22%; text-align:left">Name</th>
+                <th class="not_mapped_style" style="width: 22%; text-align:left">Created</th>
+                <th class="not_mapped_style" style="width: 15%; text-align:left">Status</th>
+                <th class="not_mapped_style" style="width: 16%; text-align:left">Assigned To</th>
+                <th class="not_mapped_style" style="width: 25%; text-align:left">Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ticket in tickets %}
+            <tr>
+                <td style="text-align:left"><a href="{% url 'tickets_info' ticket.id %}">{{ ticket.name }}</a></td>
+                <td style="text-align:left">{{ ticket.created_at }}</td>
+                <td style="text-align:left">
+                    {% if ticket.status == "NEW" %}
+                        <span class="badge text-bg-primary">{{ ticket.status }}</span>
+                    {% endif %}
+                    {% if ticket.status == "ASSIGNED / PENDING" %}
+                        <span class="badge text-bg-info">{{ ticket.status }}</span>
+                    {% endif %}
+                    {% if ticket.status == "SCHEDULED" %}
+                        <span class="badge text-bg-dark">{{ ticket.status }}</span>
+                    {% endif %}
+                    {% if ticket.status == "IN PROGRESS" %}
+                        <span class="badge text-bg-warning">{{ ticket.status }}</span>
+                    {% endif %}
+                    {% if ticket.status == "ON HOLD - User Unavailable" %}
+                        <span class="badge text-bg-danger">{{ ticket.status }}</span>
+                    {% endif %}
+                    {% if ticket.status == "ON HOLD - Waiting on Parts" %}
+                        <span class="badge text-bg-danger">{{ ticket.status }}</span>
+                    {% endif %}
+                    {% if ticket.status == "ON HOLD - Research" %}
+                        <span class="badge text-bg-danger">{{ ticket.status }}</span>
+                    {% endif %}
+                    {% if ticket.status == "ON HOLD - Misc" %}
+                        <span class="badge text-bg-danger">{{ ticket.status }}</span>
+                    {% endif %}
+                </td>
+                <td style="text-align:left">{{ ticket.assignedto }}</td>
+                <td style="text-align:left">{{ ticket.category }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <br>
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js"></script>
+
+<script>
+    $(document).ready( function () {
+
+    $.fn.dataTable.moment( 'MMM D, YYYY' );
+    $.fn.dataTable.moment( 'D-MMM-YY' );
+
+});
+</script>
+
+
+
+
+{% endblock content %}

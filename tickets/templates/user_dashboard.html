@@ -1,0 +1,67 @@
+{% extends "main.html" %}
+{% load static %}
+
+
+{% block content %}
+
+
+<div class="container">
+    <table id="example" class="table table-striped" style="width:100%">
+    <br>
+    <br>
+        <h2>My Service Requests</h2>
+        <br>
+        <thead>
+            <tr>
+                <th class="not_mapped_style" style="text-align:center">Name</th>
+                <th class="not_mapped_style" style="text-align:center">Created</th>
+                <th class="not_mapped_style" style="text-align:center">Status</th>
+                <th class="not_mapped_style" style="text-align:center">Assigned To</th>
+                <th class="not_mapped_style" style="text-align:center">Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ticket in tickets %}
+            <tr>
+                <td><a href="{% url 'tickets_info' ticket.id %}">{{ ticket.name }}</a></td>
+                <td>{{ ticket.created_at }}</td>
+                <td>
+                    {% if ticket.status == "NEW" %}
+                        <span class="badge text-bg-primary">{{ ticket.status }}</span>
+                    {% endif %}
+                    {% if ticket.status == "ASSIGNED / PENDING" %}
+                        <span class="badge text-bg-info">{{ ticket.status }}</span>
+                    {% endif %}
+                    {% if ticket.status == "SCHEDULED" %}
+                        <span class="badge text-bg-dark">{{ ticket.status }}</span>
+                    {% endif %}
+                    {% if ticket.status == "IN PROGRESS" %}
+                        <span class="badge text-bg-warning">{{ ticket.status }}</span>
+                    {% endif %}
+                    {% if ticket.status == "ON HOLD - User Unavailable" %}
+                        <span class="badge text-bg-danger">{{ ticket.status }}</span>
+                    {% endif %}
+                    {% if ticket.status == "ON HOLD - Waiting on Parts" %}
+                        <span class="badge text-bg-danger">{{ ticket.status }}</span>
+                    {% endif %}
+                    {% if ticket.status == "ON HOLD - Research" %}
+                        <span class="badge text-bg-danger">{{ ticket.status }}</span>
+                    {% endif %}
+                    {% if ticket.status == "ON HOLD - Misc" %}
+                        <span class="badge text-bg-danger">{{ ticket.status }}</span>
+                    {% endif %}
+                    {% if ticket.status == "COMPLETED" %}
+                    <span class="badge text-bg-success">{{ ticket.status }}</span>
+                    {% endif %}
+                </td>
+                <td>{{ ticket.assignedto }}</td>
+                <td>{{ ticket.category }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <br>
+</div>
+
+{% endblock content %}

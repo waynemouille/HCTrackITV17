@@ -1,0 +1,20 @@
+.descrip{
+    display: inline-block;
+    white-space: pre-line;
+    text-wrap: wrap;
+    resize: none;
+    width: 95%;
+    overflow: hidden;
+    text-align: center;
+  }
+
+.card{
+  width:650px;
+  margin-bottom:50px;
+}
+
+.card-header{
+  text-align: center;
+}
+
+

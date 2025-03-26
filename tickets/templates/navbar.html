@@ -1,0 +1,96 @@
+{% load static %}
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-sm" style="background-color: #e3f2fd;">
+  <img src="{% static 'images/logo.png' %}">&nbsp;&nbsp;&nbsp;&nbsp;
+  <div class="container-fluid">
+
+    <div class="navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+        {% if request.user.is_staff %}
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'tickets_home' %}">Service Requests</a>
+          </li>
+
+          <li>
+            <a class="nav-link">|</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'projects_home' %}">Project Tracker</a>
+          </li>
+
+          <li>
+            <a class="nav-link">|</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'knowledgebase_home' %}">Knowledge Base</a>
+          </li>
+
+          <li>
+            <a class="nav-link">|</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Tech Links
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="https://dashboard.techplusit.com" target="_blank">Managed Services</a></li>
+              <li><a class="dropdown-item" href="https://34.237.28.226:8443/manage/account/login?redirect=%2Fmanage" target="_blank">Ubiquiti Controller</a></li>
+              <li><a class="dropdown-item" href="http://10.0.0.10/" target="_blank">NEC Controller</a></li>
+              <li><a class="dropdown-item" href="{% url 'support_directory' %}" target="_blank">Support Contact Directory</a></li>
+              <li><a class="dropdown-item" href="{% url 'credentials' %}" target="_blank">HCTrackIT User Credentials</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="https://admin.microsoft.com/#/users" target="_blank">O365 - User Email Accounts</a></li>
+              <li><a class="dropdown-item" href="https://admin.exchange.microsoft.com/#/messagetrace" target="_blank">O365 - Email Message Trace</a></li>
+              <li><a class="dropdown-item" href="https://entra.microsoft.com/#view/Microsoft_AAD_UsersAndTenants/UserManagementMenuBlade/~/SignIns/menuId/?Microsoft_AAD_IAM_legacyAADRedirect=true" target="_blank">O365 - Sign-in Logs</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <a class="nav-link">|</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Reports</a>
+          </li>
+
+      </ul>
+
+      <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link">Welcome, &nbsp;<strong>{{request.user.first_name}}&nbsp;&nbsp;&nbsp;</strong></a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-primary" href="{% url 'logout' %}">Logout</a>
+          </li>
+      </ul>
+      
+      
+
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="#">My Service Requests</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link">Welcome, &nbsp;<strong>{{request.user.first_name}}&nbsp;&nbsp;&nbsp;</strong></a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-outline-primary" href="{% url 'logout' %}">Logout</a>
+        </li>
+    </ul>
+
+      {% endif %}
+    </div>
+  </div>
+</nav>

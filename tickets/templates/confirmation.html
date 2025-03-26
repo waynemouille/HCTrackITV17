@@ -1,0 +1,21 @@
+{% extends "main.html" %}
+
+
+{% block content %}
+
+
+
+
+<br>
+<br>
+<div class="container d-flex justify-content-center">
+    <h4>Thank you for submitting your request.  A member of the Hardin County Technology team will contact you shortly.
+    </h4>
+</div>
+<br>
+<div class="container d-flex justify-content-center">
+    <a href="{% url 'submit_form' %}" class="btn btn-primary">Submit another request</a>
+</div>
+
+
+{% endblock content %}

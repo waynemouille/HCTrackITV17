@@ -1,0 +1,21 @@
+{% extends "main.html" %}
+
+
+{% block content %}
+
+
+
+
+<br>
+<br>
+<div class="container d-flex justify-content-center">
+    <h4>Service Request has been deleted.
+    </h4>
+</div>
+<br>
+<div class="container d-flex justify-content-center">
+    <a href="{% url 'tickets_home' %}" class="btn btn-primary">Return to Active Service Requests</a>
+</div>
+    
+
+{% endblock content %}
