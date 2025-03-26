@@ -1,0 +1,37 @@
+{% extends "main.html" %}
+
+
+{% block content %}
+
+<br>
+<br>
+    <div class="container d-flex justify-content-center">
+        <div class="card text-center w-75">
+            <div class="card-header">
+                <h3><strong>{{ article.title }}</strong></h3>
+            </div>
+
+            <div class="card-body">
+                <p class="card-title border-bottom pb-3"><strong>Category - </strong>{{ article.category }}</p>
+                <p class="card-text"><strong>Technical Notes:</strong>
+                <p class="card-text descrip">{{ article.notes }}</p>
+                <p class="card-text"><strong>URL: {{ article.url1 }}</strong>
+                <p class="card-text"><strong>URL: {{ article.url2 }}</strong>
+            </div>
+            <div class="card-footer text-body-secondary">
+                <br/>
+                {% if request.user.is_staff %}
+                    <a href="{% url 'knowledgebase_edit' article.id %}" class="btn btn-primary">Edit Knowledge Base Article</a>&nbsp;&nbsp;
+                    <a href="{% url 'knowledgebase_delete' article.id %}" class="btn btn-danger">Delete</a>&nbsp;&nbsp;
+                    <a href="{% url 'knowledgebase_home' %}" class="btn btn-secondary">Back</a>&nbsp;&nbsp;
+                {% else %}
+                    <a href="{% url 'knowledgebase_home' %}" class="btn btn-secondary">Back</a>
+                {% endif %}
+                    <br/>
+                <br/>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}
